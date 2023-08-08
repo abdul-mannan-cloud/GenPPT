@@ -1,0 +1,13 @@
+.signin-form{
+    width: 100%;
+}
+
+.custom-form-input{
+    min-width: 400px;
+}
+
+@media screen and (max-width: 600px) {
+    .custom-form-input{
+        min-width: 100%;
+    }
+}
