@@ -7,48 +7,35 @@ import {signOut} from "@firebase/auth";
 import {auth} from "../services/firebase";
 
 export const Header = () => {
-
-    const user = useAuth();
-    const navigate = useNavigate()
-
     return (
-        <header className="header-area header-sticky sticky-top" data-wow-duration="0.75s" data-wow-delay="0s">
+        <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
                         <nav className="main-nav">
+                            {/* ***** Logo Start ***** */}
                             <a href="#" className="logo">
-                                <img className="img" src="/images/GenPPt (2).png" alt=""/>
+                                <img className="img" src="/images/GenPPt (2).png" alt="" />
                             </a>
-                            <div className="d-flex flex-row justify-content-end align-items-center">
-                                <ul className="nav">
-                                    <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
-                                    <li className="scroll-to-section"><a href="#about">About</a></li>
-                                    <li className="scroll-to-section"><a href="#services">Features</a></li>
-                                    <li className="scroll-to-section">
-                                        <a href="#pricing">Pricing</a>
-                                    </li>
-                                    {!user ? <li>
-                                            <div className="border-first-button">
-                                                <Link to="/signin">Signin</Link>
-                                            </div>
-                                        </li> :
-                                        <button className="border-0 bg-white ps-4" onClick={async () => {
-                                            await auth.signOut()
-                                        }}>
-                                            <Avatar
-                                                size={40}
-                                                name={user.displayName ? user.displayName : "Guest"}
-                                                variant="marble"
-                                                colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
-                                            />
-                                        </button>
-                                    }
-                                </ul>
-                            </div>
-                            <a className='menu-trigger'>
+                            {/* ***** Logo End ***** */}
+                            {/* ***** Menu Start ***** */}
+                            <ul className="nav">
+                                <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
+                                <li className="scroll-to-section"><a href="#about">About</a></li>
+                                <li className="scroll-to-section"><a href="#services">Services</a></li>
+                                <li className="scroll-to-section"><a href="#portfolio">Projects</a></li>
+                                {/* <li className="scroll-to-section"><a href="#blog">Blog</a></li>
+                <li className="scroll-to-section"><a href="#contact">Contact</a></li> */}
+                                <li className="scroll-to-section">
+                                    <div className="border-first-button">
+                                        <a href="#contact">Pricing</a>
+                                    </div>
+                                </li>
+                            </ul>
+                            <a className="menu-tri+gger">
                                 <span>Menu</span>
                             </a>
+                            {/* ***** Menu End ***** */}
                         </nav>
                     </div>
                 </div>
@@ -70,13 +57,13 @@ const MainBanner = () => {
     const comeFromLeftAnimation = useSpring({
         opacity: comeFromLeftInView ? 1 : 0,
         transform: comeFromLeftInView ? "translateX(0)" : "translateX(-100%)",
-        config: { duration: 1000 },
+        config: {duration: 1000},
     });
 
     const comeFromRightAnimation = useSpring({
         opacity: comeFromRightInView ? 1 : 0,
         transform: comeFromRightInView ? "translateX(0)" : "translateX(100%)",
-        config: { duration: 1000 },
+        config: {duration: 1000},
     });
 
     return (
@@ -85,9 +72,31 @@ const MainBanner = () => {
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="row">
+                            <div className="position-absolute" style={{
+                                top: -500,
+                                left: 800,
+                            }}>
+                                {/*<img src="/graph.png" width={50} alt="background"/>=*/}
+                                <svg id="sw-js-blob-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">
+                                            <stop id="stop1" stopColor="rgba(28.319, 33.995, 192.46, 1)"
+                                                  offset="0%"></stop>
+                                            <stop id="stop2" stopColor="rgba(194.797, 31, 251, 1)" offset="100%"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#sw-gradient)"
+                                          d="M17,-25.4C22.6,-22.8,28.2,-19.1,27.5,-14.4C26.8,-9.7,19.7,-3.9,19.5,3.3C19.2,10.6,25.9,19.4,25.2,23.9C24.5,28.4,16.5,28.6,9,30.9C1.5,33.3,-5.5,37.8,-11.5,37C-17.6,36.2,-22.7,30.2,-25.9,23.9C-29.2,17.6,-30.5,11.1,-29.2,5.5C-27.9,0,-24.1,-4.6,-21.8,-10.1C-19.5,-15.5,-18.8,-21.8,-15.4,-25.5C-12,-29.2,-6,-30.3,-0.2,-30C5.7,-29.7,11.3,-28.1,17,-25.4Z"
+                                          width="100%" height="100%" transform="translate(50 50)" strokeWidth="0"
+                                          style={{transition: " all 0.3s ease 0s;"}}></path>
+                                </svg>
+                            </div>
+
                             <div className="col-lg-6 align-self-center">
-                                <animated.div ref={comeFromLeftRef} style={comeFromLeftAnimation} className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"
-                                     data-wow-delay="1s">
+                                <animated.div ref={comeFromLeftRef} style={comeFromLeftAnimation}
+                                              className="left-content show-up header-text wow fadeInLeft"
+                                              data-wow-duration="1s"
+                                              data-wow-delay="1s">
                                     <div className="row">
                                         <div className="col-lg-12">
                                             <h6>Introducing GENPPT - Powered by ChatGPT</h6>
@@ -106,8 +115,9 @@ const MainBanner = () => {
                                 </animated.div>
                             </div>
                             <div className="col-lg-6">
-                                <animated.div ref={comeFromRightRef} style={comeFromRightAnimation} className="right-image wow fadeInRight" data-wow-duration="1s"
-                                     data-wow-delay="0.5s">
+                                <animated.div ref={comeFromRightRef} style={comeFromRightAnimation}
+                                              className="right-image wow fadeInRight" data-wow-duration="1s"
+                                              data-wow-delay="0.5s">
                                     <img className="img1" src="/images/GenPPt (5).png" alt="GENPPT Demo Image"/>
                                 </animated.div>
                             </div>
@@ -144,10 +154,28 @@ const AboutSection = () => {
 
     return (
         <animated.div id="about" className="about section">
-            <div className="container">
+            <div className="container bg-transparent">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="row">
+                            <div className="position-absolute" style={{
+                                left: 0,
+                                top: 1200,
+                            }}>
+                                <svg id="sw-js-blob-svg" viewBox="0 0 250 300" xmlns="http://www.w3.org/2000/svg">
+                                    <defs>
+                                        <linearGradient id="sw-gradient" x1="0" x2="1" y1="1" y2="0">
+                                            <stop id="stop1" stopColor="rgba(28.319, 33.995, 192.46, 1)"
+                                                  offset="0%"></stop>
+                                            <stop id="stop2" stopColor="rgba(194.797, 31, 251, 1)" offset="100%"></stop>
+                                        </linearGradient>
+                                    </defs>
+                                    <path fill="url(#sw-gradient)"
+                                          d="M16.5,-21.1C19.6,-13.3,19.3,-6.7,18.8,-0.5C18.3,5.6,17.6,11.3,14.4,18.8C11.3,26.4,5.6,35.8,0.5,35.3C-4.6,34.8,-9.2,24.3,-17.3,16.8C-25.5,9.2,-37.1,4.6,-39.1,-2.1C-41.2,-8.7,-33.7,-17.5,-25.6,-25.3C-17.5,-33.1,-8.7,-39.9,-1,-38.9C6.7,-37.8,13.3,-28.9,16.5,-21.1Z"
+                                          width="100%" height="100%" transform="translate(50 50)" strokeWidth="0"
+                                          style={{transition: " all 0.3s ease 0s;"}}></path>
+                                </svg>
+                            </div>
                             <animated.div ref={comeFromLeftRef} className="col-lg-6" style={comeFromLeft}>
                                 <div className="about-left-image wow fadeInLeft" data-wow-duration="1s"
                                      data-wow-delay="0.5s">
