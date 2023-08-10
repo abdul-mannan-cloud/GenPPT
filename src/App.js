@@ -6,7 +6,7 @@ import {Signin} from "./pages/Signin";
 import {Signup} from "./pages/Signup";
 import {AuthProvider} from "./components/AuthProvider";
 import {Header, Home} from "./pages/Home";
-import Intro from "./pages/Intro";
+import {Converter} from "./pages/Converter";
 
 function App() {
 
@@ -14,16 +14,14 @@ function App() {
         <div style={{height: '100vh'}}>
             <BrowserRouter>
                 <AuthProvider>
-                    <header style={{zIndex:100}}>
-                        <Header/>
-                    </header>
+                    <Header/>
                     {/*<main className="d-flex flex-column h-100 justify-content-center align-items-center">*/}
                     <main>
                         <Routes>
                             <Route path='/' element={<Home/>}/>
-                            <Route path='/intro' element={<Intro/>}/>
                             <Route path='/signin' element={<Signin/>}/>
                             <Route path='/signup' element={<Signup/>}/>
+                            <Route path='/converter' element={<Converter/>}/>
                         </Routes>
                     </main>
                 </AuthProvider>

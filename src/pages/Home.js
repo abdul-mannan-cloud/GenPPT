@@ -12,7 +12,7 @@ export const Header = () => {
     const navigate = useNavigate()
 
     return (
-        <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+        <header className="header-area header-sticky sticky-top" data-wow-duration="0.75s" data-wow-delay="0s">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
@@ -25,29 +25,26 @@ export const Header = () => {
                                     <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
                                     <li className="scroll-to-section"><a href="#about">About</a></li>
                                     <li className="scroll-to-section"><a href="#services">Features</a></li>
-                                    <li className="">
-                                        <div className="">
-                                            <a href="#pricing">Pricing</a>
-                                        </div>
+                                    <li className="scroll-to-section">
+                                        <a href="#pricing">Pricing</a>
                                     </li>
-                                    {!user && <li>
-                                        <div className="border-first-button">
-                                            <Link to="/signin">Signin</Link>
-                                        </div>
-                                    </li>}
+                                    {!user ? <li>
+                                            <div className="border-first-button">
+                                                <Link to="/signin">Signin</Link>
+                                            </div>
+                                        </li> :
+                                        <button className="border-0 bg-white ps-4" onClick={async () => {
+                                            await auth.signOut()
+                                        }}>
+                                            <Avatar
+                                                size={40}
+                                                name={user.displayName ? user.displayName : "Guest"}
+                                                variant="marble"
+                                                colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
+                                            />
+                                        </button>
+                                    }
                                 </ul>
-                                {user &&
-                                    <button className="border-0 bg-white pt-4 ps-4" onClick={async () => {
-                                        await auth.signOut()
-                                    }}>
-                                        <Avatar
-                                            size={40}
-                                            name={user.displayName ? user.displayName : "Guest"}
-                                            variant="marble"
-                                            colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
-                                        />
-                                    </button>
-                                }
                             </div>
                             <a className='menu-trigger'>
                                 <span>Menu</span>
@@ -62,73 +59,34 @@ export const Header = () => {
 
 const MainBanner = () => {
 
-    const [selectedFile, setSelectedFile] = useState(null)
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file && file.type === 'application/pdf') {
-            setSelectedFile(file);
-        } else {
-            setSelectedFile(null);
-        }
-    }
-
-    const [fadeInRef, fadeInView] = useInView({
+    const [comeFromLeftRef, comeFromLeftInView] = useInView({
         triggerOnce: true,
     });
 
-    const fadeIn = useSpring({
-        opacity: fadeInView ? 1 : 0,
-        from: {opacity: 0},
-        config: {duration: 1000},
-    })
+    const [comeFromRightRef, comeFromRightInView] = useInView({
+        triggerOnce: true,
+    });
 
-    useEffect(() => {
-        const dropContainer = document.getElementById("dropcontainer")
-        const fileInput = document.getElementById("pdfInput")
+    const comeFromLeftAnimation = useSpring({
+        opacity: comeFromLeftInView ? 1 : 0,
+        transform: comeFromLeftInView ? "translateX(0)" : "translateX(-100%)",
+        config: { duration: 1000 },
+    });
 
-        dropContainer.addEventListener("dragover", (e) => {
-            // prevent default to allow drop
-            e.preventDefault()
-        }, false)
-
-        dropContainer.addEventListener("dragenter", () => {
-            dropContainer.classList.add("drag-active")
-        })
-
-        dropContainer.addEventListener("dragleave", () => {
-            dropContainer.classList.remove("drag-active")
-        })
-
-        dropContainer.addEventListener("drop", (e) => {
-            e.preventDefault()
-            dropContainer.classList.remove("drag-active")
-            fileInput.files = e.dataTransfer.files
-            setSelectedFile(e.dataTransfer.files)
-        })
-    }, [0]);
+    const comeFromRightAnimation = useSpring({
+        opacity: comeFromRightInView ? 1 : 0,
+        transform: comeFromRightInView ? "translateX(0)" : "translateX(100%)",
+        config: { duration: 1000 },
+    });
 
     return (
-        <div className="main-banner wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-            <div  className="intro-page">
-                <animated.div className="bubble-background">
-                    <div className="bubble bubble1"></div>
-                    <div className="bubble bubble2"></div>
-                    <div className="bubble bubble3"></div>
-                    <div className="bubble bubble4"></div>
-                    <div className="bubble bubble5"></div>
-                    <div className="bubble bubble6"></div>
-                    <div className="bubble bubble7"></div>
-                    {/* Add more bubble elements */}
-                </animated.div>
-                <div className="blur-back">
-
-                </div>
-                <animated.div ref={fadeInRef} style={fadeIn} className="content">
-                    <div className="container ">
+        <div className="main-banner wow fadeIn vh-100" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div className="container">
+                <div className="row">
+                    <div className="col-lg-12">
                         <div className="row">
-                            <div className="col-lg-12 align-self-center text-center">
-                                <div className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"
+                            <div className="col-lg-6 align-self-center">
+                                <animated.div ref={comeFromLeftRef} style={comeFromLeftAnimation} className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"
                                      data-wow-delay="1s">
                                     <div className="row">
                                         <div className="col-lg-12">
@@ -140,40 +98,23 @@ const MainBanner = () => {
                                                 presentations.</p>
                                         </div>
                                         <div className="col-lg-12">
-
-                                        </div>
-                                        <div className="col-lg-3">
-
-                                        </div>
-                                        <div className="col-lg-6 align-self-center bg-white shadow p-4"
-                                             style={{borderRadius: '23px'}}>
-                                            <div className="input-group mb-3 justify-content-center">
-                                                <label htmlFor="pdfInput" className="drop-container" id="dropcontainer">
-                                                    <span className="drop-title">Drop Your Pdf files here</span>
-                                                    {/*or*/}
-                                                    <input
-                                                        style={{display:'none'}}
-                                                        type="file"
-                                                        className="custom-file-input"
-                                                        id="pdfInput"
-                                                        accept=".pdf"
-                                                        onChange={handleFileChange}
-                                                    />
-                                                </label>
-
-                                            </div>
-                                            <div className="border-first-button ">
-                                                <button>Get Started</button>
+                                            <div className="border-first-button scroll-to-section">
+                                                <Link to="/converter">Get Started</Link>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </animated.div>
+                            </div>
+                            <div className="col-lg-6">
+                                <animated.div ref={comeFromRightRef} style={comeFromRightAnimation} className="right-image wow fadeInRight" data-wow-duration="1s"
+                                     data-wow-delay="0.5s">
+                                    <img className="img1" src="/images/GenPPt (5).png" alt="GENPPT Demo Image"/>
+                                </animated.div>
                             </div>
                         </div>
                     </div>
-                </animated.div>
+                </div>
             </div>
-
         </div>
     );
 };
@@ -192,17 +133,17 @@ const AboutSection = () => {
     const comeFromLeft = useSpring({
         opacity: comeFromLeftInView ? 1 : 0,
         transform: `translate3d(${comeFromLeftInView ? 0 : -100}%, 0, 0)`,
-        config: { duration: 1000 },
+        config: {duration: 1000},
     });
 
     const comeFromRight = useSpring({
         opacity: comeFromRightInView ? 1 : 0,
         transform: `translate3d(${comeFromRightInView ? 0 : 100}%, 0, 0)`,
-        config: { duration: 1000 },
+        config: {duration: 1000},
     });
 
     return (
-        <animated.div id="about" className="about section" >
+        <animated.div id="about" className="about section">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
@@ -213,8 +154,9 @@ const AboutSection = () => {
                                     <img src="/images/GenPPt (3).png" alt="GENPPT Team at Quest Islamabad"/>
                                 </div>
                             </animated.div>
-                            <animated.div ref={comeFromRightRef} className="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s" style={comeFromRight}
-                                 data-wow-delay="0.5s">
+                            <animated.div ref={comeFromRightRef} className="col-lg-6 align-self-center wow fadeInRight"
+                                          data-wow-duration="1s" style={comeFromRight}
+                                          data-wow-delay="0.5s">
                                 <div className="about-right-content">
                                     <div className="section-heading">
                                         <h6>About GENPPT</h6>
@@ -360,9 +302,9 @@ const Services = () => {
                                                                         className="fa fa-check"></i>Reduced Effort</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>Formatted Slides</span>
-                                                                    
+
                                                                 </div>
-                                                               
+
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -388,9 +330,9 @@ const Services = () => {
                                                                         className="fa fa-check"></i>Theme Selection</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>Regular Updates</span>
-                                                                    
+
                                                                 </div>
-                                                             
+
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -407,7 +349,8 @@ const Services = () => {
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
                                                                 <h4>Smart Content Organization</h4>
-                                                                <p>Smarly organize content from PDF to Powerpoint Slides</p>
+                                                                <p>Smarly organize content from PDF to Powerpoint
+                                                                    Slides</p>
                                                                 <div className="ticks-list">
                                                                     <span><i className="fa fa-check"></i> Auto Organization</span>
                                                                     <span><i
@@ -416,9 +359,9 @@ const Services = () => {
                                                                         className="fa fa-check"></i>Relevant Info</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>Accurate Info</span>
-                                                                    
+
                                                                 </div>
-                                                            
+
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -437,16 +380,17 @@ const Services = () => {
                                                                 <h4>Visual Enhancement</h4>
                                                                 <p>Visually enhance your slides by adding images</p>
                                                                 <div className="ticks-list">
-                                                                    <span><i className="fa fa-check"></i>Online Images</span>
+                                                                    <span><i
+                                                                        className="fa fa-check"></i>Online Images</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>PDF Graphics</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>Enhanced Visuals</span>
                                                                     <span><i
                                                                         className="fa fa-check"></i>High Quality Images</span>
-                                                               
+
                                                                 </div>
-                                                              
+
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -559,9 +503,9 @@ const FreeQuote = () => {
 const Contact = () => {
 
     return (
-        <div id="contact"  className="contact-us section">
-            <div className="container" >
-                <div className="row"  >
+        <div id="contact" className="contact-us section">
+            <div className="container">
+                <div className="row">
                     <div className="col-lg-6 offset-lg-3">
                         <div className="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                             <h6>Contact Us</h6>
@@ -579,8 +523,11 @@ const Contact = () => {
                                 </div>
                                 <div className="col-lg-5">
                                     <div id="map">
-                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d519.4234124287747!2d73.07493036192332!3d33.66830414389061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1691622558978!5m2!1sen!2s" width="100%"
-                                                height="636px" style={{border:0}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
+                                        <iframe
+                                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d519.4234124287747!2d73.07493036192332!3d33.66830414389061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1691622558978!5m2!1sen!2s"
+                                            width="100%"
+                                            height="636px" style={{border: 0}} allowFullScreen="" loading="lazy"
+                                            referrerPolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                                 <div className="col-lg-7">
@@ -693,30 +640,30 @@ const Pricing = () => {
     const comeFromBottom = useSpring({
         opacity: comeFromBottomInView ? 1 : 0,
         transform: `translate3d(0, ${comeFromBottomInView ? 0 : 100}%, 0)`,
-        config: { duration: 700 },
+        config: {duration: 700},
     });
 
     const comeFromLeft = useSpring({
         opacity: comeFromLeftInView ? 1 : 0,
         transform: `translate3d(${comeFromLeftInView ? 0 : -100}%, 0, 0)`,
-        config: { duration: 700 },
+        config: {duration: 700},
     });
 
     const comeFromRight = useSpring({
         opacity: comeFromRightInView ? 1 : 0,
         transform: `translate3d(${comeFromRightInView ? 0 : 100}%, 0, 0)`,
-        config: { duration: 700 },
+        config: {duration: 700},
     });
 
 
     return (
         <div className="container mt-4 d-flex flex-column gap-3" id="pricing">
-            <div className="row " style={{color:'#726ae3'}}>
+            <div className="row " style={{color: '#726ae3'}}>
                 <h1>Pricing</h1>
             </div>
             <div className="row">
                 <animated.div ref={comeFromLeftRef} className="col-lg-4" style={comeFromLeft}>
-                    <div className="card p-4 d-grid gap-2 h-100" style={{borderRadius:'23px'}}>
+                    <div className="card p-4 d-grid gap-2 h-100" style={{borderRadius: '23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Free
                         </h1>
@@ -744,7 +691,7 @@ const Pricing = () => {
                     </div>
                 </animated.div>
                 <animated.div ref={comeFromBottomRef} style={comeFromBottom} className="col-lg-4">
-                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius:'23px'}}>
+                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius: '23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Standard
                         </h1>
@@ -777,7 +724,7 @@ const Pricing = () => {
                     </div>
                 </animated.div>
                 <animated.div ref={comeFromRightRef} style={comeFromRight} className="col-lg-4">
-                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius:'23px'}}>
+                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius: '23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Premium
                         </h1>
@@ -822,17 +769,8 @@ export const Home = () => {
             {/*    /!* Pre-loader content *!/*/}
             {/*</div>*/}
 
-            {/*/!* Pre-header *!/*/}
-            {/*<div className="pre-header">*/}
-            {/*    /!* Pre-header content *!/*/}
-            {/*</div>*/}
-
-            {/* Header */}
-            {/*<Header/>*/}
-            {/* Main banner */}
             <MainBanner/>
             <AboutSection/>
-            {/* You can include other sections here */}
             <Services/>
             <FreeQuote/>
             <Pricing/>
