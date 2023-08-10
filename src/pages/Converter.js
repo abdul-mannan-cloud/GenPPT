@@ -1,8 +1,12 @@
 import React, {useEffect, useState} from "react";
 import {animated, useInView, useSpring} from "react-spring";
+import axios from 'axios';
+import ThemeMenu from "../components/ThemeMenu";
 
 export const Converter = () => {
     const [selectedFile, setSelectedFile] = useState(null)
+    const [numSlides, setNumSlides] = useState(10)
+    const [selectedTheme, setSelectedTheme] = useState(0);
 
     const handleFileChange = (event) => {
         const file = event.target.files[0];
@@ -11,6 +15,47 @@ export const Converter = () => {
         } else {
             setSelectedFile(null);
         }
+    }
+
+    const submitFile = async () => {
+        
+        if(selectedFile){
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('numberofslides', numSlides);
+            formData.append('theme', selectedTheme);
+
+            try {
+            const response = await axios.post('http://localhost:5000/generate_pptx', formData, {
+                headers: {
+                'Content-Type': 'multipart/form-data',
+                },
+                responseType: 'blob',
+            });
+
+            const url = URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'output_presentation.pptx');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+            // setIsLoading(false);
+            // setIsDownloaded(true);
+            } catch (error) {
+            // toast.warning("Error Generating PPTX");
+            // setIsLoading(false);
+            }
+        }
+        else{
+            console.log('No File')
+        }
+    }
+
+    const changeNumSlides = (event) => {
+        setNumSlides(event.target.value);
     }
 
     const [fadeInRef, fadeInView] = useInView({
@@ -100,10 +145,24 @@ export const Converter = () => {
                                                         onChange={handleFileChange}
                                                     />
                                                 </label>
+                                                <div style={{display:'flex', flexDirection:'column'}}>
+                                                <span>{`Number of Slides: ${numSlides}`}</span>
+                                                <input
+                                                type='range'
+                                                onChange={changeNumSlides}
+                                                min={8}
+                                                max={14}
+                                                step={1}
+                                                defaultValue={10}
+                                                value={numSlides}
+                                                className='custom-slider'
+                                            ></input>
+                                            </div>
+                                            <ThemeMenu selectedTheme={selectedTheme} setSelectedTheme={setSelectedTheme}/>
 
                                             </div>
                                             <div className="border-first-button ">
-                                                <button>Get Started</button>
+                                                <button onClick={submitFile}>Get Started</button>
                                             </div>
                                         </div>
                                     </div>
