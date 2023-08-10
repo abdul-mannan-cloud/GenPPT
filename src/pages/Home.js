@@ -30,7 +30,7 @@ export const Header = () => {
                                     </li>
                                     {!user ? <li>
                                             <div className="border-first-button">
-                                                <Link to="/signin">Signin</Link>
+                                                {/* <Link to="/signin">Signin</Link> */}
                                             </div>
                                         </li> :
                                         <button className="border-0 bg-white ps-4" onClick={async () => {
