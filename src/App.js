@@ -28,7 +28,7 @@ function App() {
                     </main>
                 </AuthProvider>
             </BrowserRouter>
-            <footer>
+            <footer style={{position:"relative",bottom:0,width:"100vw"}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">

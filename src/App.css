@@ -9,6 +9,10 @@
     }
 }
 
+body{
+    overflow-x:hidden;
+}
+
 .intro-page {
     display: flex;
     flex-direction: column;

@@ -35,7 +35,7 @@ export const Signin = () => {
 
     return (
         <>
-            <div className='w-100 h-100 d-flex justify-content-center align-items-center'>
+            <div className='w-100 d-flex justify-content-center align-items-center' style={{height:"80vh"}}>
                 <div className='d-flex flex-column border p-4 gap-2 rounded bg-white shadow'>
                     <h1>Signin</h1>
                     <form className='d-flex flex-column justify-content-center align-items-center gap-2 signin-form '>
@@ -51,8 +51,8 @@ export const Signin = () => {
                         <button
                             onClick={signInWithGoogle}
                             type='button' className='w-100 btn btn-lg btn-light mt-2 d-flex gap-2 justify-content-center align-items-centerg'>
-                            <img src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" width="30" alt="google logo png suite everything you need know about google newest" />
-                            Sign in with Google
+                            <img className="google-img" src="https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png" width="30" alt="google logo png suite everything you need know about google newest"  />
+                                Sign in with Google
                             </button>
                         <button type='button' onClick={signInWithCredentials} className='w-100 btn btn-lg btn-primary mt-2'>Sign in</button>
                     </form>

@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "@firebase/auth";
+import {createUserWithEmailAndPassword} from "@firebase/auth";
 import {auth} from "../services/firebase";
 import {Link} from "react-router-dom";
 
@@ -39,7 +39,7 @@ export const Signup = () => {
 
     return (
         <>
-            <div className='w-100 h-100 d-flex justify-content-center align-items-center'>
+            <div className='w-100 d-flex justify-content-center align-items-center' style={{height:"80vh"}}>
                 <div className='d-flex flex-column border p-4 gap-2 rounded bg-white shadow'>
                     <h1>Signup</h1>
                     <form className='d-flex flex-column justify-content-center align-items-center gap-2 signin-form '>

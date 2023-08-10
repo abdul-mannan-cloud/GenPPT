@@ -2,11 +2,14 @@ import React, {useEffect, useState} from 'react';
 import {animated, useInView, useSpring} from "react-spring";
 import Avatar from "boring-avatars";
 import {useAuth} from "../components/AuthProvider";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {signOut} from "@firebase/auth";
+import {auth} from "../services/firebase";
 
 export const Header = () => {
 
     const user = useAuth();
+    const navigate = useNavigate()
 
     return (
         <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
@@ -22,23 +25,28 @@ export const Header = () => {
                                     <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
                                     <li className="scroll-to-section"><a href="#about">About</a></li>
                                     <li className="scroll-to-section"><a href="#services">Features</a></li>
-                                    <li className="scroll-to-section">
-                                        <div className="border-first-button text-center"><a href="#pricing">Pricing</a></div>
+                                    <li className="">
+                                        <div className="">
+                                            <a href="#pricing">Pricing</a>
+                                        </div>
                                     </li>
+                                    {!user && <li>
+                                        <div className="border-first-button">
+                                            <Link to="/signin">Signin</Link>
+                                        </div>
+                                    </li>}
                                 </ul>
-                                {user ?
-                                    <button className="border-0 bg-white pt-4 ps-4">
+                                {user &&
+                                    <button className="border-0 bg-white pt-4 ps-4" onClick={async () => {
+                                        await auth.signOut()
+                                    }}>
                                         <Avatar
                                             size={40}
                                             name={user.displayName ? user.displayName : "Guest"}
                                             variant="marble"
                                             colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
                                         />
-                                    </button> :<div className="border-first-button">
-                                    <button>
-                                        <Link to="/signin">Sign In</Link>
                                     </button>
-                                </div>
                                 }
                             </div>
                             <a className='menu-trigger'>
