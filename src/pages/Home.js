@@ -7,35 +7,48 @@ import {signOut} from "@firebase/auth";
 import {auth} from "../services/firebase";
 
 export const Header = () => {
+
+    const user = useAuth();
+    const navigate = useNavigate()
+
     return (
-        <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
+        <header className="header-area header-sticky sticky-top" data-wow-duration="0.75s" data-wow-delay="0s">
             <div className="container">
                 <div className="row">
                     <div className="col-12">
                         <nav className="main-nav">
-                            {/* ***** Logo Start ***** */}
                             <a href="#" className="logo">
-                                <img className="img" src="/images/GenPPt (2).png" alt="" />
+                                <img className="img" src="/images/GenPPt (2).png" alt=""/>
                             </a>
-                            {/* ***** Logo End ***** */}
-                            {/* ***** Menu Start ***** */}
-                            <ul className="nav">
-                                <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
-                                <li className="scroll-to-section"><a href="#about">About</a></li>
-                                <li className="scroll-to-section"><a href="#services">Services</a></li>
-                                <li className="scroll-to-section"><a href="#portfolio">Projects</a></li>
-                                {/* <li className="scroll-to-section"><a href="#blog">Blog</a></li>
-                <li className="scroll-to-section"><a href="#contact">Contact</a></li> */}
-                                <li className="scroll-to-section">
-                                    <div className="border-first-button">
-                                        <a href="#contact">Pricing</a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <a className="menu-tri+gger">
+                            <div className="d-flex flex-row justify-content-end align-items-center">
+                                <ul className="nav">
+                                    <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
+                                    <li className="scroll-to-section"><a href="#about">About</a></li>
+                                    <li className="scroll-to-section"><a href="#services">Features</a></li>
+                                    <li className="scroll-to-section">
+                                        <a href="#pricing">Pricing</a>
+                                    </li>
+                                    {!user ? <li>
+                                            <div className="border-first-button">
+                                                 <button onClick={()=>navigate("/signin")}>Signin</button>
+                                            </div>
+                                        </li> :
+                                        <button className="border-0 bg-white ps-4" onClick={async () => {
+                                            await auth.signOut()
+                                        }}>
+                                            <Avatar
+                                                size={40}
+                                                name={user.displayName ? user.displayName : "Guest"}
+                                                variant="marble"
+                                                colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
+                                            />
+                                        </button>
+                                    }
+                                </ul>
+                            </div>
+                            <a className='menu-trigger'>
                                 <span>Menu</span>
                             </a>
-                            {/* ***** Menu End ***** */}
                         </nav>
                     </div>
                 </div>
@@ -57,13 +70,13 @@ const MainBanner = () => {
     const comeFromLeftAnimation = useSpring({
         opacity: comeFromLeftInView ? 1 : 0,
         transform: comeFromLeftInView ? "translateX(0)" : "translateX(-100%)",
-        config: {duration: 1000},
+        config: { duration: 1000 },
     });
 
     const comeFromRightAnimation = useSpring({
         opacity: comeFromRightInView ? 1 : 0,
         transform: comeFromRightInView ? "translateX(0)" : "translateX(100%)",
-        config: {duration: 1000},
+        config: { duration: 1000 },
     });
 
     return (
