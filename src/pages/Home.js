@@ -343,22 +343,18 @@ const Services = () => {
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
                                                                 <h4>Convert PDF to PPT</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                                <p>Seamless PDF to PPTX Conversion</p>
                                                                 <div className="ticks-list">
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                    <span><i className="fa fa-check"></i>Seamless PDF Conversion</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
+                                                                        className="fa fa-check"></i>Preserve Layout</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
+                                                                        className="fa fa-check"></i>Reduced Effort</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
-                                                                    <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                        className="fa fa-check"></i>Formatted Slides</span>
+                                                                    
                                                                 </div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                               
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -374,23 +370,19 @@ const Services = () => {
                                                     <div className="row">
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
-                                                                <h4>Healthy Food & Life</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                                <h4>Multiple Themes to Select From</h4>
+                                                                <p>Choose the best theme that suits your need</p>
                                                                 <div className="ticks-list">
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                    <span><i className="fa fa-check"></i>Diverse Themes</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
+                                                                        className="fa fa-check"></i>Stylish Templates</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
+                                                                        className="fa fa-check"></i>Theme Selection</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
-                                                                    <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                        className="fa fa-check"></i>Regular Updates</span>
+                                                                    
                                                                 </div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                             
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -406,23 +398,19 @@ const Services = () => {
                                                     <div className="row">
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
-                                                                <h4>Car Re-search & Transport</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                                <h4>Smart Content Organization</h4>
+                                                                <p>Smarly organize content from PDF to Powerpoint Slides</p>
                                                                 <div className="ticks-list">
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                    <span><i className="fa fa-check"></i> Auto Organization</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
+                                                                        className="fa fa-check"></i>Headings & Bullets</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
+                                                                        className="fa fa-check"></i>Relevant Info</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
-                                                                    <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                        className="fa fa-check"></i>Accurate Info</span>
+                                                                    
                                                                 </div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                            
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
@@ -438,23 +426,19 @@ const Services = () => {
                                                     <div className="row">
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
-                                                                <h4>Online Shopping & Tracking ID</h4>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                                <h4>Visual Enhancement</h4>
+                                                                <p>Visually enhance your slides by adding images</p>
                                                                 <div className="ticks-list">
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                    <span><i className="fa fa-check"></i>Online Images</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
+                                                                        className="fa fa-check"></i>PDF Graphics</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
+                                                                        className="fa fa-check"></i>Enhanced Visuals</span>
                                                                     <span><i
-                                                                        className="fa fa-check"></i> Data Info</span>
-                                                                    <span><i
-                                                                        className="fa fa-check"></i> SEO Analysis</span>
-                                                                    <span><i className="fa fa-check"></i> Optimized Template</span>
+                                                                        className="fa fa-check"></i>High Quality Images</span>
+                                                               
                                                                 </div>
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                                                                    elit...</p>
+                                                              
                                                             </div>
                                                         </div>
                                                         <div className="col-lg-6 align-self-center">
