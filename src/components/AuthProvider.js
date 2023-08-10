@@ -10,8 +10,8 @@ export const AuthProvider = ({children}) => {
 
     useEffect(()=>{
         const authObserver = auth.onAuthStateChanged((user)=>{
-            if(!user)
-                navigate('/signin')
+            // if(!user)
+            //     navigate('/signin')
             setUser(user)
         })
         return ()=> authObserver();

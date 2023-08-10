@@ -18,7 +18,7 @@
     background-color: transparent;
     overflow: hidden;
     position: relative;
-
+    z-index: 1;
 }
 
 .border-first-button button{
@@ -31,6 +31,7 @@
     font-weight: 500 !important;
     letter-spacing: 0.3px !important;
     transition: all .5s;
+    width: 100%;
 }
 
 .border-first-button button:hover{
@@ -42,7 +43,7 @@
     width: 100vw;
     height: 100vh;
     z-index: 1;
-    backdrop-filter: blur(3px); /* Add the backdrop-filter property */
+    backdrop-filter: blur(20px); /* Add the backdrop-filter property */
     position: absolute;
     top: 0;
 }
@@ -113,8 +114,8 @@ p {
 }
 
 .bubble2 {
-    top: 30%;
-    left: 50%;
+    top: 20%;
+    left: 60%;
     animation-duration: 6s;
     background-color: red;
 
@@ -123,17 +124,15 @@ p {
 .bubble3 {
     top: 70%;
     left: 80%;
-    animation-duration: 8s;
-    width: 320px;
-    height: 320px;
+    animation-duration: 6s;
+    width: 280px;
+    height: 280px;
     background-color: purple;
-
 }
 
 .bubble4 {
-    top: 60%;
-    left: 30%;
-
+    top: 65%;
+    left: 10%;
     width: 200px;
     height: 200px;
     animation-duration: 5s;
@@ -141,15 +140,33 @@ p {
 }
 
 .bubble5 {
-    top: 40%;
+    top: 45%;
     left: 70%;
     height: 140px;
     width: 140px;
     animation-duration: 7s;
 }
 
+.bubble6 {
+    top: 35%;
+    left: 6%;
+    animation-duration: 6s;
+    width: 90px;
+    height: 90px;
+    background-color: cadetblue;
+}
+
+.bubble7 {
+    top: 25%;
+    left: 85%;
+    animation-duration: 6s;
+    width: 220px;
+    height: 220px;
+    background-color: #fa65b1 ;
+}
+
 input[type=file] {
-    width: 350px;
+    width: 750px;
     max-width: 100%;
     color: #444;
     padding: 5px;
@@ -182,7 +199,8 @@ input[type=file]::file-selector-button:hover {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 150px;
+    width: 100%;
     padding: 20px;
     border-radius: 23px;
     border: 2px dashed #555;

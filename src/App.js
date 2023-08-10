@@ -5,7 +5,7 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {Signin} from "./pages/Signin";
 import {Signup} from "./pages/Signup";
 import {AuthProvider} from "./components/AuthProvider";
-import {Home} from "./pages/Home";
+import {Header, Home} from "./pages/Home";
 import Intro from "./pages/Intro";
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
         <div style={{height: '100vh'}}>
             <BrowserRouter>
                 <AuthProvider>
-                    <header>
+                    <header style={{zIndex:100}}>
+                        <Header/>
                     </header>
                     {/*<main className="d-flex flex-column h-100 justify-content-center align-items-center">*/}
                     <main>
@@ -27,6 +28,16 @@ function App() {
                     </main>
                 </AuthProvider>
             </BrowserRouter>
+            <footer>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <p>Copyright © 2022 GemPPt Co., Ltd. All Rights Reserved.
+                                </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     );
 }

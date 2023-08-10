@@ -1,6 +1,13 @@
 import React, {useEffect, useState} from 'react';
+import {animated, useInView, useSpring} from "react-spring";
+import Avatar from "boring-avatars";
+import {useAuth} from "../components/AuthProvider";
+import {Link} from "react-router-dom";
 
-const Header = () => {
+export const Header = () => {
+
+    const user = useAuth();
+
     return (
         <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">
             <div className="container">
@@ -10,15 +17,30 @@ const Header = () => {
                             <a href="#" className="logo">
                                 <img className="img" src="/images/GenPPt (2).png" alt=""/>
                             </a>
-                            <ul className="nav">
-                                <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
-                                <li className="scroll-to-section"><a href="#about">About</a></li>
-                                <li className="scroll-to-section"><a href="#services">Services</a></li>
-                                <li className="scroll-to-section"><a href="#portfolio">Projects</a></li>
-                                <li className="scroll-to-section">
-                                    <div className="border-first-button"><a href="#contact">Pricing</a></div>
-                                </li>
-                            </ul>
+                            <div className="d-flex flex-row justify-content-end align-items-center">
+                                <ul className="nav">
+                                    <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
+                                    <li className="scroll-to-section"><a href="#about">About</a></li>
+                                    <li className="scroll-to-section"><a href="#services">Features</a></li>
+                                    <li className="scroll-to-section">
+                                        <div className="border-first-button text-center"><a href="#pricing">Pricing</a></div>
+                                    </li>
+                                </ul>
+                                {user ?
+                                    <button className="border-0 bg-white pt-4 ps-4">
+                                        <Avatar
+                                            size={40}
+                                            name={user.displayName ? user.displayName : "Guest"}
+                                            variant="marble"
+                                            colors={["#A3A948", "#fa65b1", "#F85931", "#009989"]}
+                                        />
+                                    </button> :<div className="border-first-button">
+                                    <button>
+                                        <Link to="/signin">Sign In</Link>
+                                    </button>
+                                </div>
+                                }
+                            </div>
                             <a className='menu-trigger'>
                                 <span>Menu</span>
                             </a>
@@ -42,6 +64,16 @@ const MainBanner = () => {
             setSelectedFile(null);
         }
     }
+
+    const [fadeInRef, fadeInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const fadeIn = useSpring({
+        opacity: fadeInView ? 1 : 0,
+        from: {opacity: 0},
+        config: {duration: 1000},
+    })
 
     useEffect(() => {
         const dropContainer = document.getElementById("dropcontainer")
@@ -69,10 +101,23 @@ const MainBanner = () => {
     }, [0]);
 
     return (
-        <div className="main-banner wow fadeIn vh-100" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-12">
+        <div className="main-banner wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+            <div  className="intro-page">
+                <animated.div className="bubble-background">
+                    <div className="bubble bubble1"></div>
+                    <div className="bubble bubble2"></div>
+                    <div className="bubble bubble3"></div>
+                    <div className="bubble bubble4"></div>
+                    <div className="bubble bubble5"></div>
+                    <div className="bubble bubble6"></div>
+                    <div className="bubble bubble7"></div>
+                    {/* Add more bubble elements */}
+                </animated.div>
+                <div className="blur-back">
+
+                </div>
+                <animated.div ref={fadeInRef} style={fadeIn} className="content">
+                    <div className="container ">
                         <div className="row">
                             <div className="col-lg-12 align-self-center text-center">
                                 <div className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"
@@ -89,12 +134,17 @@ const MainBanner = () => {
                                         <div className="col-lg-12">
 
                                         </div>
-                                        <div className="col-lg-12 bg-white shadow-lg p-4 rounded">
+                                        <div className="col-lg-3">
+
+                                        </div>
+                                        <div className="col-lg-6 align-self-center bg-white shadow p-4"
+                                             style={{borderRadius: '23px'}}>
                                             <div className="input-group mb-3 justify-content-center">
                                                 <label htmlFor="pdfInput" className="drop-container" id="dropcontainer">
-                                                    <span className="drop-title">Drop files here</span>
-                                                    or
+                                                    <span className="drop-title">Drop Your Pdf files here</span>
+                                                    {/*or*/}
                                                     <input
+                                                        style={{display:'none'}}
                                                         type="file"
                                                         className="custom-file-input"
                                                         id="pdfInput"
@@ -104,41 +154,58 @@ const MainBanner = () => {
                                                 </label>
 
                                             </div>
-                                            <div className="border-first-button scroll-to-section">
+                                            <div className="border-first-button ">
                                                 <button>Get Started</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            {/*<div className="col-lg-6">*/}
-                            {/*    <div className="right-image wow fadeInRight" data-wow-duration="1s"*/}
-                            {/*         data-wow-delay="0.5s">*/}
-                            {/*        <img className="img1" src="/images/GenPPt (5).png" alt="GENPPT Demo Image"/>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
                         </div>
                     </div>
-                </div>
+                </animated.div>
             </div>
+
         </div>
     );
 };
 
 const AboutSection = () => {
+
+
+    const [comeFromLeftRef, comeFromLeftInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const [comeFromRightRef, comeFromRightInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const comeFromLeft = useSpring({
+        opacity: comeFromLeftInView ? 1 : 0,
+        transform: `translate3d(${comeFromLeftInView ? 0 : -100}%, 0, 0)`,
+        config: { duration: 1000 },
+    });
+
+    const comeFromRight = useSpring({
+        opacity: comeFromRightInView ? 1 : 0,
+        transform: `translate3d(${comeFromRightInView ? 0 : 100}%, 0, 0)`,
+        config: { duration: 1000 },
+    });
+
     return (
-        <div id="about" className="about section">
+        <animated.div id="about" className="about section" >
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
                         <div className="row">
-                            <div className="col-lg-6">
+                            <animated.div ref={comeFromLeftRef} className="col-lg-6" style={comeFromLeft}>
                                 <div className="about-left-image wow fadeInLeft" data-wow-duration="1s"
                                      data-wow-delay="0.5s">
                                     <img src="/images/GenPPt (3).png" alt="GENPPT Team at Quest Islamabad"/>
                                 </div>
-                            </div>
-                            <div className="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s"
+                            </animated.div>
+                            <animated.div ref={comeFromRightRef} className="col-lg-6 align-self-center wow fadeInRight" data-wow-duration="1s" style={comeFromRight}
                                  data-wow-delay="0.5s">
                                 <div className="about-right-content">
                                     <div className="section-heading">
@@ -210,12 +277,12 @@ const AboutSection = () => {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </animated.div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </animated.div>
     );
 };
 
@@ -275,7 +342,7 @@ const Services = () => {
                                                     <div className="row">
                                                         <div className="col-lg-6 align-self-center">
                                                             <div className="left-text">
-                                                                <h4>SEO Analysis & Daily Reports</h4>
+                                                                <h4>Convert PDF to PPT</h4>
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing
                                                                     elit...</p>
                                                                 <div className="ticks-list">
@@ -483,7 +550,7 @@ const FreeQuote = () => {
                                 </div>
                                 <div className="col-lg-4 col-sm-4">
                                     <fieldset>
-                                        <button type="submit" className="main-button">
+                                        <button type="submit" className="main-button ">
                                             Get Quote Now
                                         </button>
                                     </fieldset>
@@ -498,10 +565,11 @@ const FreeQuote = () => {
 };
 
 const Contact = () => {
+
     return (
-        <div id="contact" className="contact-us section">
-            <div className="container">
-                <div className="row">
+        <div id="contact"  className="contact-us section">
+            <div className="container" >
+                <div className="row"  >
                     <div className="col-lg-6 offset-lg-3">
                         <div className="section-heading wow fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
                             <h6>Contact Us</h6>
@@ -519,14 +587,8 @@ const Contact = () => {
                                 </div>
                                 <div className="col-lg-5">
                                     <div id="map">
-                                        <iframe
-                                            src="https://maps.google.com/maps?q=Av.+L%C3%BAcio+Costa,+Rio+de+Janeiro+-+RJ,+Brazil&t=&z=13&ie=UTF8&iwloc=&output=embed"
-                                            width="100%"
-                                            height="636px"
-                                            frameBorder="0"
-                                            style={{border: '0'}}
-                                            allowFullScreen
-                                        ></iframe>
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d519.4234124287747!2d73.07493036192332!3d33.66830414389061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1691622558978!5m2!1sen!2s" width="100%"
+                                                height="636px" style={{border:0}} allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                                     </div>
                                 </div>
                                 <div className="col-lg-7">
@@ -544,7 +606,7 @@ const Contact = () => {
                                                 <div className="info-post">
                                                     <div className="icon">
                                                         <img src="/images/email-icon.png" alt=""/>
-                                                        <a href="#">our@email.com</a>
+                                                        <a href="#">haroon@quest.com</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -552,7 +614,7 @@ const Contact = () => {
                                                 <div className="info-post">
                                                     <div className="icon">
                                                         <img src="/images/location-icon.png" alt=""/>
-                                                        <a href="#">123 Rio de Janeiro</a>
+                                                        <a href="#">i8 Markaz</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -623,14 +685,46 @@ const Contact = () => {
 };
 
 const Pricing = () => {
+
+    const [comeFromBottomRef, comeFromBottomInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const [comeFromLeftRef, comeFromLeftInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const [comeFromRightRef, comeFromRightInView] = useInView({
+        triggerOnce: true,
+    });
+
+    const comeFromBottom = useSpring({
+        opacity: comeFromBottomInView ? 1 : 0,
+        transform: `translate3d(0, ${comeFromBottomInView ? 0 : 100}%, 0)`,
+        config: { duration: 700 },
+    });
+
+    const comeFromLeft = useSpring({
+        opacity: comeFromLeftInView ? 1 : 0,
+        transform: `translate3d(${comeFromLeftInView ? 0 : -100}%, 0, 0)`,
+        config: { duration: 700 },
+    });
+
+    const comeFromRight = useSpring({
+        opacity: comeFromRightInView ? 1 : 0,
+        transform: `translate3d(${comeFromRightInView ? 0 : 100}%, 0, 0)`,
+        config: { duration: 700 },
+    });
+
+
     return (
-        <div className="container mt-4 d-flex flex-column gap-3">
-            <div className="row text-primary">
+        <div className="container mt-4 d-flex flex-column gap-3" id="pricing">
+            <div className="row " style={{color:'#726ae3'}}>
                 <h1>Pricing</h1>
             </div>
             <div className="row">
-                <div className="col-lg-4">
-                    <div className="card p-4 d-grid gap-2 h-100">
+                <animated.div ref={comeFromLeftRef} className="col-lg-4" style={comeFromLeft}>
+                    <div className="card p-4 d-grid gap-2 h-100" style={{borderRadius:'23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Free
                         </h1>
@@ -650,11 +744,15 @@ const Pricing = () => {
                                 <p className="text-primary">&#10003; </p>
                                 <p className="text-black">8 Slides per Presentation</p>
                             </div>
+                            <div className="d-flex gap-2">
+                                <p className="text-primary">&#10003; </p>
+                                <p className="text-black">Single Theme</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card p-4 d-flex flex-column gap-2">
+                </animated.div>
+                <animated.div ref={comeFromBottomRef} style={comeFromBottom} className="col-lg-4">
+                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius:'23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Standard
                         </h1>
@@ -665,9 +763,11 @@ const Pricing = () => {
                         <div>
                             <h2>5 $</h2>
                         </div>
-                        <button className="btn btn-primary w-100">
-                            Subscribe
-                        </button>
+                        <div className="border-first-button">
+                            <button className="w-100">
+                                Subscribe
+                            </button>
+                        </div>
                         <div>
                             <div className="d-flex gap-2">
                                 <p className="text-primary">&#10003; </p>
@@ -677,11 +777,15 @@ const Pricing = () => {
                                 <p className="text-primary">&#10003; </p>
                                 <p className="text-black">Upto 10 Slides per Presentation</p>
                             </div>
+                            <div className="d-flex gap-2">
+                                <p className="text-primary">&#10003; </p>
+                                <p className="text-black">Multiple Themes</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div className="col-lg-4">
-                    <div className="card p-4 d-flex flex-column gap-2">
+                </animated.div>
+                <animated.div ref={comeFromRightRef} style={comeFromRight} className="col-lg-4">
+                    <div className="card p-4 d-flex flex-column gap-2" style={{borderRadius:'23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Premium
                         </h1>
@@ -692,9 +796,11 @@ const Pricing = () => {
                         <div>
                             <h2>10 $</h2>
                         </div>
-                        <button className="btn btn-primary w-100">
-                            Subscribe
-                        </button>
+                        <div className="border-first-button">
+                            <button className="w-100">
+                                Subscribe
+                            </button>
+                        </div>
                         <div>
                             <div className="d-flex gap-2">
                                 <p className="text-primary">&#10003; </p>
@@ -704,9 +810,13 @@ const Pricing = () => {
                                 <p className="text-primary">&#10003; </p>
                                 <p className="text-black">Upto 14 Slides per Presentation</p>
                             </div>
+                            <div className="d-flex gap-2">
+                                <p className="text-primary">&#10003; </p>
+                                <p className="text-black">Multiple Themes</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </animated.div>
             </div>
         </div>
     )
@@ -726,7 +836,7 @@ export const Home = () => {
             {/*</div>*/}
 
             {/* Header */}
-            <Header/>
+            {/*<Header/>*/}
             {/* Main banner */}
             <MainBanner/>
             <AboutSection/>
