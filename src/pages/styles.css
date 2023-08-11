@@ -20,7 +20,6 @@
 .theme-menu-container {
     width: 100%;
     overflow-x: auto;
-    
   }
 
 .slide-container {
@@ -51,8 +50,11 @@
     flex-wrap: nowrap;
     padding: 10px;
     margin-top: 20px;
-    background-color: #8f8f8f;
-    /* justify-content: center; */
+    /*background-color: #8f8f8f;*/
+    border-radius: 23px;
+    border: 1px solid #fa65b1;
+    /*box-shadow: black 0px 0px 1px 0px;*/
+     justify-content: space-between;
   }
   
   .theme-card {
@@ -83,4 +85,30 @@
   .selected {
     background-color: black;
   }
-  
+
+.text{
+    font-size: 18px;
+    color: #fa65b1;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}
+
+
+.animate-pulse{
+
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.button-get-started{
+    width: 200px !important;
+}

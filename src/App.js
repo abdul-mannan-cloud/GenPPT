@@ -7,11 +7,14 @@ import {Signup} from "./pages/Signup";
 import {AuthProvider} from "./components/AuthProvider";
 import {Header, Home} from "./pages/Home";
 import {Converter} from "./pages/Converter";
+import {ToastContainer} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
     return (
         <div style={{height: '100vh'}}>
+            <ToastContainer/>
             <BrowserRouter>
                 <AuthProvider>
                     <Header/>
@@ -19,6 +22,7 @@ function App() {
                     <main>
                         <Routes>
                             <Route path='/' element={<Home/>}/>
+                            <Route path='/home' element={<Home/>}/>
                             <Route path='/signin' element={<Signin/>}/>
                             <Route path='/signup' element={<Signup/>}/>
                             <Route path='/converter' element={<Converter/>}/>

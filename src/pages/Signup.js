@@ -1,9 +1,12 @@
 import {useState} from "react";
 import {createUserWithEmailAndPassword} from "@firebase/auth";
 import {auth} from "../services/firebase";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 export const Signup = () => {
+
+    const navigate = useNavigate()
 
     const [inputs, setInputs] = useState({
         name: '',
@@ -23,17 +26,19 @@ export const Signup = () => {
                 return "Email provided is already in use";
 
             default:
-                return "";
+                return "Some Error is Occured Please Try Again";
         }
     }
 
     const signUpWithCredentials = () => {
         createUserWithEmailAndPassword(auth, inputs.email, inputs.password)
             .then((userCredential) => {
-                console.log(userCredential)
+                toast.success("Signed Up Successfully")
+                navigate('/signin')
             })
             .catch((error) => {
-                console.log(error.code)
+                const message = mapAuthCodeToMessage(error.code)
+                toast.error(message)
             });
     }
 

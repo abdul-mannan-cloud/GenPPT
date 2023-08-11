@@ -218,6 +218,7 @@ body {
   background-color: #726ae3;
 }
 
+
 .border-first-button a {
   display: inline-block !important;
   padding: 10px 20px !important;
@@ -2215,4 +2216,5 @@ responsive
   form#contact {
     padding: 30px;
   }
+}
 }

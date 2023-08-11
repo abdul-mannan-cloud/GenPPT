@@ -5,6 +5,7 @@ import {useAuth} from "../components/AuthProvider";
 import {Link, useNavigate} from "react-router-dom";
 import {signOut} from "@firebase/auth";
 import {auth} from "../services/firebase";
+import {toast} from "react-toastify";
 
 export const Header = () => {
 
@@ -17,7 +18,7 @@ export const Header = () => {
                 <div className="row">
                     <div className="col-12">
                         <nav className="main-nav">
-                            <a href="#" className="logo">
+                            <a href="/" className="logo">
                                 <img className="img" src="/images/GenPPt (2).png" alt=""/>
                             </a>
                             <div className="d-flex flex-row justify-content-end align-items-center">
@@ -33,7 +34,7 @@ export const Header = () => {
                                                  <button onClick={()=>navigate("/signin")}>Signin</button>
                                             </div>
                                         </li> :
-                                        <button className="border-0 bg-white ps-4" onClick={async () => {
+                                        <button className="border-0 bg-white ps-4" data-toggle="tooltip" data-placement="bottom" title="Signout" onClick={async () => {
                                             await auth.signOut()
                                         }}>
                                             <Avatar
@@ -58,6 +59,9 @@ export const Header = () => {
 };
 
 const MainBanner = () => {
+
+    const navigate = useNavigate()
+    const auth = useAuth()
 
     const [comeFromLeftRef, comeFromLeftInView] = useInView({
         triggerOnce: true,
@@ -121,7 +125,15 @@ const MainBanner = () => {
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="border-first-button scroll-to-section">
-                                                <Link to="/converter">Get Started</Link>
+                                                <button
+                                                    onClick={() => {
+                                                        console.log('auth,',auth)
+                                                        if(!auth)
+                                                            toast.error("Please Signin First")
+                                                        else navigate("/converter")
+                                                    }}
+                                                    className="button-get-started"
+                                                >Get Started</button>
                                             </div>
                                         </div>
                                     </div>

@@ -3,6 +3,7 @@ import {signInWithEmailAndPassword, signInWithPopup} from "@firebase/auth";
 import {auth, googleAuthProvider} from "../services/firebase";
 import {useState} from "react";
 import {Link, useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 export const Signin = () => {
 
@@ -13,23 +14,39 @@ export const Signin = () => {
         password:''
     })
 
+    function mapAuthCodeToMessage(authCode) {
+        switch (authCode) {
+            case "auth/invalid-email":
+                return "Email provided is invalid";
+
+            case "auth/wrong-password":
+                return "Password provided is incorrect";
+
+            default:
+                return "Some Error is Occured Please Try Again";
+        }
+    }
+
+
     const handleInputChange = (event) => {
         setInputs(values=>({...values,[event.target.name]:event.target.value}))
     }
 
     const signInWithGoogle = async () => {
         await signInWithPopup(auth, googleAuthProvider).catch(
-            err => console.log(err)
+            err => toast.error("Some Error Occured Please Try Again")
         )
     }
 
     const signInWithCredentials = () => {
         signInWithEmailAndPassword(auth, inputs.email, inputs.password)
         .then((userCredential) => {
-            console.log(userCredential)
+            toast.success("Signed In Successfully")
+            navigate('/')
         })
         .catch((error) => {
-            console.log(error)
+            const message = mapAuthCodeToMessage(error.code)
+            toast.error(message)
         });
     }
 

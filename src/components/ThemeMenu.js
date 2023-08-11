@@ -19,7 +19,7 @@ const ThemeMenu = ({selectedTheme, setSelectedTheme}) => {
   const themes = [
     { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#FFF8F0', textColor: '#000000', borderColor: '#AABCB6' },
     { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#FFFFFF', textColor: '#000000', borderColor: '#FFC000' },
-    { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#000000', textColor: '#FFFFFF', borderColor: '#FFFFFF' },
+    { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#000000', textColor: '#FFFFFF', borderColor: 'purple' },
   ];
 
 

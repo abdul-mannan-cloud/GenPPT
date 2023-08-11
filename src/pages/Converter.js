@@ -3,11 +3,16 @@ import {animated, useInView, useSpring} from "react-spring";
 import axios from 'axios';
 import ThemeMenu from "../components/ThemeMenu";
 import {useAuth} from "../components/AuthProvider";
-import { Canvas, useFrame } from 'react-three-fiber';
+import {GridLoader} from "react-spinners";
+import {toast} from "react-toastify";
+import TextGenerator from "../components/TextGenerator";
 export const Converter = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [numSlides, setNumSlides] = useState(10)
     const [selectedTheme, setSelectedTheme] = useState(0);
+    // const [image,setImage] = useState(0)
+    const [loading,setLoading] = useState(false);
+    const [message,setMessage] = useState(false);
     const auth = useAuth()
 
     const handleFileChange = (event) => {
@@ -22,12 +27,12 @@ export const Converter = () => {
     const submitFile = async () => {
         
         if(selectedFile){
-
+            setLoading(true)
             const formData = new FormData();
             formData.append('file', selectedFile);
             formData.append('numberofslides', numSlides);
             formData.append('theme', selectedTheme);
-
+            // formData.append("images",image)
             try {
             const response = await axios.post('http://localhost:5000/generate_pptx', formData, {
                 headers: {
@@ -47,12 +52,12 @@ export const Converter = () => {
             // setIsLoading(false);
             // setIsDownloaded(true);
             } catch (error) {
-            // toast.warning("Error Generating PPTX");
-            // setIsLoading(false);
+            toast.warning("Error Generating PPTX");
             }
+            setLoading(false)
         }
         else{
-            console.log('No File')
+            toast.error("No File Selected")
         }
     }
 
@@ -95,28 +100,6 @@ export const Converter = () => {
         })
     }, [0]);
 
-    const Slide = ({ index }) => {
-        const slideHeight = 0.5;
-        const spacing = 0.02;
-
-        useFrame(({ clock, size }) => {
-            const yPos = index * (slideHeight + spacing);
-            const offsetY = Math.sin(clock.elapsedTime + index * 0.3) * 0.05;
-            const slidePosition = [-1.5, yPos + offsetY, 0];
-            // Update slide position based on animation
-        });
-
-        return (
-            <mesh position={[0, 0, 0]} rotation={[0, 0, 0]}>
-                {/* Define slide mesh */}
-            </mesh>
-        );
-    };
-
-    const slides = Array.from({ length: numSlides }, (_, index) => (
-        <Slide key={index} index={index} />
-    ));
-
     return (
         <div className=" wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
             <div  className="intro-page">
@@ -154,15 +137,16 @@ export const Converter = () => {
                                         <div className="col-lg-3">
 
                                         </div>
-                                        <div className="col-lg-6 align-self-center bg-white shadow p-4"
-                                             style={{borderRadius: '23px'}}>
+                                        {!loading && <div className="col-lg-6 align-self-center bg-white shadow p-4"
+                                              style={{borderRadius: '23px'}}>
                                             <div className="input-group mb-3 justify-content-center">
-                                                <label htmlFor="pdfInput" className="drop-container " id="dropcontainer" style={{borderRadius:23}}>
+                                                <label htmlFor="pdfInput" className="drop-container " id="dropcontainer"
+                                                       style={{borderRadius: 23}}>
                                                     <span className="drop-title">Drop Your Pdf files here</span>
-                                                    <span >{selectedFile?selectedFile.name:""}</span>
+                                                    <span>{selectedFile ? selectedFile.name : ""}</span>
                                                     {/*or*/}
                                                     <input
-                                                        style={{display:'none'}}
+                                                        style={{display: 'none'}}
                                                         type="file"
                                                         className="custom-file-input"
                                                         id="pdfInput"
@@ -170,7 +154,20 @@ export const Converter = () => {
                                                         onChange={handleFileChange}
                                                     />
                                                 </label>
-                                                <div style={{display:'flex', flexDirection:'column',width:'100%',marginTop:'10px'}}>
+                                                {/*<select className="form-select mt-2" style={{borderRadius: 23}}*/}
+                                                {/*        onChange={(e) => {*/}
+                                                {/*            setImage(parseInt(e.target.value))*/}
+                                                {/*        }} aria-label="Default select example">*/}
+                                                {/*    <option selected={true} value="0">Online Images</option>*/}
+                                                {/*    <option value="1">PDF images (takes more time)</option>*/}
+                                                {/*</select>*/}
+
+                                                <div style={{
+                                                    display: 'flex',
+                                                    flexDirection: 'column',
+                                                    width: '100%',
+                                                    marginTop: '10px'
+                                                }}>
                                                     <input
                                                         onChange={changeNumSlides}
                                                         min={8}
@@ -183,21 +180,20 @@ export const Converter = () => {
                                                             width: '100%',
                                                         }}
                                                     />
-                                                    <div className="slide-container">
-                                                        <Canvas className="canvas">
-                                                            <ambientLight />
-                                                            <pointLight position={[10, 10, 10]} />
-                                                            <group>{slides}</group>
-                                                        </Canvas>                                                    </div>
                                                     <span>{`Number of Slides: ${numSlides}`}</span>
 
-                                            </div>
-                                            <ThemeMenu selectedTheme={selectedTheme} setSelectedTheme={setSelectedTheme}/>
+                                                </div>
+                                                <ThemeMenu selectedTheme={selectedTheme}
+                                                           setSelectedTheme={setSelectedTheme}/>
 
                                             </div>
                                             <div className="border-first-button ">
-                                                <button onClick={submitFile}>Get Started</button>
+                                                <button onClick={submitFile}>Start Convertion</button>
                                             </div>
+                                        </div>}
+                                        <div>
+                                            <GridLoader color="#fa65b1" size={30} loading={loading} />
+                                            {loading && <TextGenerator/>}
                                         </div>
                                     </div>
                                 </div>
