@@ -23,11 +23,11 @@ export const Header = () => {
                             </a>
                             <div className="d-flex flex-row justify-content-end align-items-center">
                                 <ul className="nav">
-                                    <li className="scroll-to-section"><a href="#top" className="active">Home</a></li>
-                                    <li className="scroll-to-section"><a href="#about">About</a></li>
-                                    <li className="scroll-to-section"><a href="#services">Features</a></li>
+                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#top')}  className="active">Home</a></li>
+                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#about')} >About</a></li>
+                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#services')} >Features</a></li>
                                     <li className="scroll-to-section">
-                                        <a href="#pricing">Pricing</a>
+                                        <a onClick={()=>document.location.href = ('/#pricing')}>Pricing</a>
                                     </li>
                                     {!user ? <li>
                                             <div className="border-first-button">
