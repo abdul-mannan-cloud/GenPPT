@@ -33,7 +33,10 @@ export const Signin = () => {
     }
 
     const signInWithGoogle = async () => {
-        await signInWithPopup(auth, googleAuthProvider).catch(
+        await signInWithPopup(auth, googleAuthProvider).then(()=>{
+            toast.success("Signed In Successfully")
+            navigate('/')
+        }).catch(
             err => toast.error("Some Error Occured Please Try Again")
         )
     }
