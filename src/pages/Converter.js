@@ -96,7 +96,8 @@ export const Converter = () => {
             e.preventDefault()
             dropContainer.classList.remove("drag-active")
             fileInput.files = e.dataTransfer.files
-            setSelectedFile(e.dataTransfer.files)
+            console.log("files ,",e.dataTransfer.files)
+            setSelectedFile(e.dataTransfer.files[0])
         })
     }, [0]);
 
