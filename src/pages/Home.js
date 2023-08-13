@@ -31,7 +31,7 @@ export const Header = () => {
                                     </li>
                                     {!user ? <li>
                                             <div className="border-first-button">
-                                                 <button onClick={()=>navigate("/signin")}>Signin</button>
+                                                 <button onClick={()=>navigate("/signin")}>Sign in</button>
                                             </div>
                                         </li> :
                                         <button className="border-0 bg-white ps-4" data-toggle="tooltip" data-placement="bottom" title="Signout" onClick={async () => {
@@ -185,7 +185,7 @@ const AboutSection = () => {
                         <div className="row">
                             <div className="position-absolute" style={{
                                 left: 0,
-                                top: 1200,
+                                top: 900,
                             }}>
                                 <svg id="sw-js-blob-svg" viewBox="0 0 250 300" xmlns="http://www.w3.org/2000/svg">
                                     <defs>
@@ -716,7 +716,7 @@ const Pricing = () => {
             </div>
             <div className="row">
                 <animated.div ref={comeFromLeftRef} className="col-lg-4" style={comeFromLeft}>
-                    <div className="card p-4 d-grid gap-2 h-100" style={{borderRadius: '23px'}}>
+                    <div className="card p-4 d-grid gap-2 h-100 " style={{borderRadius: '23px'}}>
                         <h1 style={{color: "#fa65b1"}}>
                             Free
                         </h1>
@@ -730,7 +730,7 @@ const Pricing = () => {
                         <div>
                             <div className="d-flex gap-2">
                                 <p className="text-primary">&#10003; </p>
-                                <p className="text-black">10 Conversion per month</p>
+                                <p className="text-black">5 Conversions</p>
                             </div>
                             <div className="d-flex gap-2">
                                 <p className="text-primary">&#10003; </p>
@@ -756,7 +756,7 @@ const Pricing = () => {
                             <h2>5 $</h2>
                         </div>
                         <div className="border-first-button">
-                            <button className="w-100">
+                            <button className="w-100 mb-2">
                                 Subscribe
                             </button>
                         </div>
@@ -789,7 +789,7 @@ const Pricing = () => {
                             <h2>10 $</h2>
                         </div>
                         <div className="border-first-button">
-                            <button className="w-100">
+                            <button className="w-100 mb-2">
                                 Subscribe
                             </button>
                         </div>

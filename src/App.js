@@ -21,24 +21,30 @@ function App() {
                     {/*<main className="d-flex flex-column h-100 justify-content-center align-items-center">*/}
                     <main>
                         <Routes>
-                            <Route path='/' element={<Home/>}/>
-                            <Route path='/signin' element={<Signin/>}/>
-                            <Route path='/signup' element={<Signup/>}/>
-                            <Route path='/converter' element={<Converter/>}/>
-                        </Routes>
-                    </main>
-                </AuthProvider>
-            </BrowserRouter>
-            <footer style={{position:"relative",bottom:0,width:"100vw"}}>
+                            <Route path='/' element={
+                                <>
+                                <Home/>
+                            <footer style={{position:"relative",bottom:0,width:"100vw"}}>
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-12">
-                            <p>Copyright © 2022 GemPPt Co., Ltd. All Rights Reserved.
+                            <p>Copyright © 2022 GenPPt Co., Ltd. All Rights Reserved.
                                 </p>
                         </div>
                     </div>
                 </div>
             </footer>
+                                </>
+                            }/>
+                            <Route path='/signin' element={<Signin/>}/>
+                            <Route path='/signup' element={<Signup/>}/>
+                            <Route path='/converter' element={<Converter/>
+                        }/>
+                        </Routes>
+                    </main>
+                </AuthProvider>
+            </BrowserRouter>
+            
         </div>
     );
 }

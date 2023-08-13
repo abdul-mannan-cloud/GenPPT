@@ -52,7 +52,6 @@
     margin-top: 20px;
     /*background-color: #8f8f8f;*/
     border-radius: 23px;
-    border: 1px solid #fa65b1;
     /*box-shadow: black 0px 0px 1px 0px;*/
      justify-content: space-between;
   }
@@ -63,9 +62,9 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    min-width: 150px;
-    max-width: 250px;
-    min-height: 80px;
+    min-width: 100px;
+    max-width: 220px;
+    min-height: 100px;
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
@@ -111,4 +110,12 @@
 
 .button-get-started{
     width: 200px !important;
+}
+
+@media only screen and (max-width:500px) {
+
+  .responsive-container{
+    max-width: 300px;
+  }
+  
 }
