@@ -117,7 +117,7 @@ export const Converter = () => {
 
                 </div>
                 <animated.div ref={fadeInRef} style={fadeIn} className="content">
-                    <div className="container ">
+                    <div className="container responsive-container">
                         <div className="row">
                             <div className="col-lg-12 align-self-center text-center">
                                 <div className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"

@@ -1,14 +1,15 @@
 import React from 'react';
 import '../pages/styles.css'; 
 
-const ThemeCard = ({ title, subtitle, backgroundColor, textColor, borderColor, isSelected, onClick, index }) => {
+const ThemeCard = ({ imgSrc, borderColor, isSelected, onClick, index }) => {
   
  
   return (
 
-    <div className="theme-card" style={{ backgroundColor, border: isSelected===index? `7px solid ${borderColor}`: 'none' }} onClick={onClick}>
-      <h3 className="theme-title" style={{color: textColor}}>{title}</h3>
-      <p className="theme-subtitle" style={{color: textColor}} >{subtitle}</p>
+    <div className="theme-card" style={{ border: isSelected===index? `7px solid ${borderColor}`: 'none' }} onClick={onClick}>
+
+      <img className='theme-image' src={imgSrc} alt="">
+      </img>
     </div>
   );
   
@@ -17,9 +18,9 @@ const ThemeCard = ({ title, subtitle, backgroundColor, textColor, borderColor, i
 
 const ThemeMenu = ({selectedTheme, setSelectedTheme}) => {
   const themes = [
-    { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#FFF8F0', textColor: '#000000', borderColor: '#AABCB6' },
-    { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#FFFFFF', textColor: '#000000', borderColor: '#FFC000' },
-    { title: 'Title', subtitle: 'Subtitle', backgroundColor: '#000000', textColor: '#FFFFFF', borderColor: 'purple' },
+    { imgSrc: '/Images/T1.png', borderColor: '#AABCB6' },
+    { imgSrc: '/Images/T2.png', borderColor: '#FFC000' },
+    { imgSrc: '/Images/T3.png', borderColor: '#000000' },
   ];
 
 
@@ -36,10 +37,8 @@ const ThemeMenu = ({selectedTheme, setSelectedTheme}) => {
           <ThemeCard
             key={i}
             index={i}
-            title={theme.title}
-            subtitle={theme.subtitle}
-            backgroundColor={theme.backgroundColor}
-            textColor={theme.textColor}
+            
+            imgSrc={theme.imgSrc}
             borderColor={theme.borderColor}
             isSelected={selectedTheme}
             onClick={() => handleThemeClick(i)}
