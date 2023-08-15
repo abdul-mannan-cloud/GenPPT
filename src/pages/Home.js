@@ -23,11 +23,12 @@ export const Header = () => {
                             </a>
                             <div className="d-flex flex-row justify-content-end align-items-center">
                                 <ul className="nav">
-                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#top')}  className="active">Home</a></li>
-                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#about')} >About</a></li>
-                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#services')} >Features</a></li>
+                                    <li className="scroll-to-section "><a onClick={()=>document.location.href = ('/#top')}  className="active hover-link"
+                                    >Home</a></li>
+                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#about')} className="hover-link">About</a></li>
+                                    <li className="scroll-to-section"><a onClick={()=>document.location.href = ('/#services')} className="hover-link">Features</a></li>
                                     <li className="scroll-to-section">
-                                        <a onClick={()=>document.location.href = ('/#pricing')}>Pricing</a>
+                                        <a onClick={()=>document.location.href = ('/#pricing')} className="hover-link">Pricing</a>
                                     </li>
                                     {!user ? <li>
                                             <div className="border-first-button">
@@ -84,7 +85,7 @@ const MainBanner = () => {
     });
 
     return (
-        <div className="main-banner wow fadeIn vh-100" id="top" data-wow-duration="1s" data-wow-delay="0.5s">
+        <div className="main-banner wow fadeIn " id="top" data-wow-duration="1s" data-wow-delay="0.5s">
             <div className="container">
                 <div className="row">
                     <div className="col-lg-12">
@@ -182,8 +183,8 @@ const AboutSection = () => {
             <div className="container bg-transparent">
                 <div className="row">
                     <div className="col-lg-12">
-                        <div className="row">
-                            <div className="position-absolute" style={{
+                        <div className="row ">
+                            <div className="position-absolute d-sm-none" style={{
                                 left: 0,
                                 top: 900,
                             }}>
@@ -714,7 +715,7 @@ const Pricing = () => {
             <div className="row " style={{color: '#726ae3'}}>
                 <h1>Pricing</h1>
             </div>
-            <div className="row">
+            <div className="row gap-3 gap-lg-0">
                 <animated.div ref={comeFromLeftRef} className="col-lg-4" style={comeFromLeft}>
                     <div className="card p-4 d-grid gap-2 h-100 " style={{borderRadius: '23px'}}>
                         <h1 style={{color: "#fa65b1"}}>

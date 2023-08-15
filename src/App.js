@@ -23,28 +23,28 @@ function App() {
                         <Routes>
                             <Route path='/' element={
                                 <>
-                                <Home/>
-                            <footer style={{position:"relative",bottom:0,width:"100vw"}}>
-                <div className="container">
-                    <div className="row">
-                        <div className="col-lg-12">
-                            <p>Copyright © 2022 GenPPt Co., Ltd. All Rights Reserved.
-                                </p>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+                                    <Home/>
+                                    <footer style={{position: "relative", bottom: 0, width: "100vw"}}>
+                                        <div className="container">
+                                            <div className="row">
+                                                <div className="col-lg-12">
+                                                    <p>Copyright © 2022 GenPPt Co., Ltd. All Rights Reserved.
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </footer>
                                 </>
                             }/>
                             <Route path='/signin' element={<Signin/>}/>
                             <Route path='/signup' element={<Signup/>}/>
                             <Route path='/converter' element={<Converter/>
-                        }/>
+                            }/>
                         </Routes>
                     </main>
                 </AuthProvider>
             </BrowserRouter>
-            
+
         </div>
     );
 }
