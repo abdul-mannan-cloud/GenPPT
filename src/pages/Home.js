@@ -117,7 +117,7 @@ const MainBanner = () => {
                                               data-wow-delay="1s">
                                     <div className="row">
                                         <div className="col-lg-12">
-                                            <h6>Introducing GENPPT - Powered by ChatGPT</h6>
+                                            <h6>Introducing GENPPT</h6>
                                             <h2>Transform PDFs into Engaging PPT Slides</h2>
                                             <p>With just a few clicks, GENPPT utilizes advanced AI technology to convert
                                                 your PDFs into compelling PowerPoint slides using the keywords you
@@ -214,13 +214,10 @@ const AboutSection = () => {
                                 <div className="about-right-content">
                                     <div className="section-heading">
                                         <h6>About GENPPT</h6>
-                                        <h4>Innovation at <em>Quest Islamabad</em></h4>
+                                        <h4>Easily Generate <em>Presentations</em></h4>
                                         <div className="line-dec"></div>
                                     </div>
-                                    <p>GENPPT was crafted during the "Summer of Innovation" at Quest Islamabad, a
-                                        groundbreaking program that empowers interns to design and develop cutting-edge
-                                        AI products. We're proud to introduce GENPPT, an AI-driven tool that turns PDFs
-                                        into compelling slides, ensuring your presentations always make an impact.</p>
+                                    <p>Elevate your presentation game with GenPPT's unparalleled features that enable you to effortlessly craft stunning slideshows from PDFs of all sizes. Our platform offers a diverse range of themes tailored to different styles and purposes, ensuring your presentations not only convey information but also captivate audiences visually. With just a few clicks, you can select from a library of themes and customize the appearance of each slide, all while our state-of-the-art AI technology preserves the integrity of your content. Let your creativity soar as you transform PDFs into dynamic PowerPoint presentations that leave a lasting impression.</p>
                                     <div className="row">
                                         <div className="col-lg-4 col-sm-4">
                                             <div className="skill-item first-skill-item wow fadeIn"
@@ -316,7 +313,7 @@ const Services = () => {
                                                     PDF to PPT
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div className="thumb-button">
                                                 <div className="thumb">
                                                     <span className="icon"><img src="/images/service-icon-02.png"
                                                                                 alt=""/></span>
@@ -332,7 +329,7 @@ const Services = () => {
                                             </div>
                                             <div>
                                                 <div className="thumb">
-                                                    <span className="icon"><img src="/images/service-icon-04.png"
+                                                    <span className="icon icon-effect"><img src="/images/service-icon-04.png"
                                                                                 alt=""/></span>
                                                     Enhanced Images
                                                 </div>
@@ -455,7 +452,7 @@ const Services = () => {
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li>
+                                            {/* <li>
                                                 <div className="thumb">
                                                     <div className="row">
                                                         <div className="col-lg-6 align-self-center">
@@ -486,7 +483,7 @@ const Services = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </li>
+                                            </li> */}
                                         </ul>
                                     </div>
                                 </div>
@@ -713,7 +710,7 @@ const Pricing = () => {
     return (
         <div className="container mt-4 d-flex flex-column gap-3" id="pricing">
             <div className="row " style={{color: '#726ae3'}}>
-                <h1>Pricing</h1>
+                <h1 style={{zIndex:100}}>Pricing</h1>
             </div>
             <div className="row gap-3 gap-lg-0">
                 <animated.div ref={comeFromLeftRef} className="col-lg-4" style={comeFromLeft}>
@@ -826,7 +823,7 @@ export const Home = () => {
             <MainBanner/>
             <AboutSection/>
             <Services/>
-            <FreeQuote/>
+            {/* <FreeQuote/> */}
             <Pricing/>
             <Contact/>
         </div>

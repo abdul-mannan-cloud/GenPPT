@@ -18,7 +18,7 @@ const ThemeCard = ({ imgSrc, borderColor, isSelected, onClick, index }) => {
 
 const ThemeMenu = ({selectedTheme, setSelectedTheme}) => {
   const themes = [
-    { imgSrc: '/Images/T1.png', borderColor: '#AABCB6' },
+    { imgSrc: '/Images/T1.png', borderColor: '#b2cfdb' },
     { imgSrc: '/Images/T2.png', borderColor: '#FFC000' },
     { imgSrc: '/Images/T3.png', borderColor: '#000000' },
   ];

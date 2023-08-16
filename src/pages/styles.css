@@ -123,3 +123,17 @@
 .hover-link{
     cursor: pointer;
 }
+
+
+.icon-effect{
+  animation-name: icon-e;
+  animation-duration: 2s;
+  /* animation-delay: 2s; */
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes icon-e {
+  from {transform: scale(0.9);}
+  to {transform: scale(1.1);}
+}

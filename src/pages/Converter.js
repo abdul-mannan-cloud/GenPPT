@@ -10,7 +10,9 @@ export const Converter = () => {
     const [selectedFile, setSelectedFile] = useState(null)
     const [numSlides, setNumSlides] = useState(10)
     const [selectedTheme, setSelectedTheme] = useState(0);
+    const [currentUrl, setCurrentUrl] = useState(null);
     // const [image,setImage] = useState(0)
+    const [downloaded,setDownloaded] = useState(false);
     const [loading,setLoading] = useState(false);
     const [message,setMessage] = useState(false);
     const auth = useAuth()
@@ -24,6 +26,18 @@ export const Converter = () => {
         }
     }
 
+    const downloadFile = () => {
+
+        if(currentUrl){
+            const link = document.createElement('a');
+            link.href = currentUrl;
+            link.setAttribute('download', 'output_presentation.pptx');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+        setDownloaded(false);
+    }
     const submitFile = async () => {
         
         if(selectedFile){
@@ -41,16 +55,10 @@ export const Converter = () => {
                 responseType: 'blob',
             });
 
-            const url = URL.createObjectURL(new Blob([response.data]));
-            const link = document.createElement('a');
-            link.href = url;
-            link.setAttribute('download', 'output_presentation.pptx');
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            setCurrentUrl(URL.createObjectURL(new Blob([response.data])));
+            
 
-            // setIsLoading(false);
-            // setIsDownloaded(true);
+            setDownloaded(true)
             } catch (error) {
             toast.warning("Error Generating PPTX");
             }
@@ -138,7 +146,7 @@ export const Converter = () => {
                                         <div className="col-lg-3">
 
                                         </div>
-                                        {!loading && <div className="col-lg-6 align-self-center bg-white shadow p-4"
+                                        {!loading && !downloaded && <div className="col-lg-6 align-self-center bg-white shadow p-4"
                                               style={{borderRadius: '23px'}}>
                                             <div className="input-group mb-3 justify-content-center">
                                                 <label htmlFor="pdfInput" className="drop-container " id="dropcontainer"
@@ -192,10 +200,16 @@ export const Converter = () => {
                                                 <button onClick={submitFile}>Start Convertion</button>
                                             </div>
                                         </div>}
-                                        <div>
-                                            <GridLoader color="#fa65b1" size={30} loading={loading} />
-                                            {loading && <TextGenerator/>}
-                                        </div>
+                                        {loading && <div  className="col-lg-6 align-self-center bg-white shadow p-4" style={{borderRadius: '23px', marginTop:"30px"}}>
+                                            <GridLoader color="#fa65b1" size={30} />
+                                            <TextGenerator/>
+                                        </div>}
+                                        {!loading && downloaded && <div  className="col-lg-6 align-self-center bg-white shadow p-4" style={{borderRadius: '23px', marginTop:"30px"}}>
+                                        <span className="drop-title">Your File Has Been Downloaded!!</span>
+                                        <div className="border-first-button" style={{marginTop: "30px"}}>
+                                                <button onClick={downloadFile}>Download Presentation</button>
+                                            </div>
+                                        </div>}
                                     </div>
                                 </div>
                             </div>
