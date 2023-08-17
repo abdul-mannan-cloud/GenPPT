@@ -572,16 +572,7 @@ const Contact = () => {
                                         <img src="/images/contact-dec.png" alt=""/>
                                     </div>
                                 </div>
-                                <div className="col-lg-5">
-                                    <div id="map">
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d519.4234124287747!2d73.07493036192332!3d33.66830414389061!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1691622558978!5m2!1sen!2s"
-                                            width="100%"
-                                            height="636px" style={{border: 0}} allowFullScreen="" loading="lazy"
-                                            referrerPolicy="no-referrer-when-downgrade"></iframe>
-                                    </div>
-                                </div>
-                                <div className="col-lg-7">
+                                <div className="col-lg-12">
                                     <div className="fill-form">
                                         <div className="row">
                                             <div className="col-lg-4">
@@ -596,7 +587,7 @@ const Contact = () => {
                                                 <div className="info-post">
                                                     <div className="icon">
                                                         <img src="/images/email-icon.png" alt=""/>
-                                                        <a href="#">haroon@quest.com</a>
+                                                        <a href="#">info@quest.com</a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -604,7 +595,7 @@ const Contact = () => {
                                                 <div className="info-post">
                                                     <div className="icon">
                                                         <img src="/images/location-icon.png" alt=""/>
-                                                        <a href="#">i8 Markaz</a>
+                                                        <a href="#">Quest Lab</a>
                                                     </div>
                                                 </div>
                                             </div>

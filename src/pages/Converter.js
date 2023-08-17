@@ -39,7 +39,7 @@ export const Converter = () => {
         setDownloaded(false);
     }
     const submitFile = async () => {
-        
+
         if(selectedFile){
             setLoading(true)
             const formData = new FormData();
@@ -56,7 +56,7 @@ export const Converter = () => {
             });
 
             setCurrentUrl(URL.createObjectURL(new Blob([response.data])));
-            
+
 
             setDownloaded(true)
             } catch (error) {
@@ -79,6 +79,12 @@ export const Converter = () => {
 
     const fadeIn = useSpring({
         opacity: fadeInView ? 1 : 0,
+        from: {opacity: 0},
+        config: {duration: 1000},
+    })
+
+    const fadeInn = useSpring({
+        opacity: 1,
         from: {opacity: 0},
         config: {duration: 1000},
     })
@@ -132,14 +138,19 @@ export const Converter = () => {
                                 <div className="left-content show-up header-text wow fadeInLeft" data-wow-duration="1s"
                                      data-wow-delay="1s">
                                     <div className="row">
-                                        <div className="col-lg-12">
+                                        {!loading && <div className="col-lg-12">
                                             <h6>Introducing GENPPT - Powered by ChatGPT</h6>
                                             <h2>Transform PDFs into Engaging PPT Slides</h2>
                                             <p>With just a few clicks, GENPPT utilizes advanced AI technology to convert
                                                 your PDFs into compelling PowerPoint slides using the keywords you
                                                 provide. Say goodbye to manual slide creation and elevate your
                                                 presentations.</p>
-                                        </div>
+                                        </div>}
+                                        {
+                                            loading && <div className="col-lg-12 text-success " style={fadeInn}>
+                                                <h1>All good Things Take Time</h1>
+                                            </div>
+                                        }
                                         <div className="col-lg-12">
 
                                         </div>
