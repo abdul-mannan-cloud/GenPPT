@@ -28,7 +28,7 @@ function App() {
                                         <div className="container">
                                             <div className="row">
                                                 <div className="col-lg-12">
-                                                    <p>Copyright © 2022 GenPPt Co., Ltd. All Rights Reserved.
+                                                    <p>Copyright © 2023 GenPPt. All Rights Reserved.
                                                     </p>
                                                 </div>
                                             </div>
